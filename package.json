@@ -1,0 +1,21 @@
+{
+  "name": "115bot",
+  "version": "3.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "author": "sfkwww",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.19.2",
+    "discord.js": "^11.5.1",
+    "dotenv": "^8.1.0",
+    "express": "^4.17.1",
+    "package": "^1.0.1",
+    "pg": "latest",
+    "pg-hstore": "latest",
+    "sequelize": "latest",
+    "sqlite3": "latest"
+  }
+}
