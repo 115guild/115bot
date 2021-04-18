@@ -3,7 +3,7 @@ const config = require('./config');
 
 e = module.exports;
 //sequelize = new Sequelize(config.DATABASE_URL);
-sequelize = new Sequelize(config.DATABASE_URL, {logging: false});
+sequelize = new Sequelize(config.DATABASE_URL, {logging: false, ssl: true});
 
 var Users = sequelize.define('users', {
   discordID: {
