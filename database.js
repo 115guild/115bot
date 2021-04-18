@@ -3,7 +3,14 @@ const config = require('./config');
 
 e = module.exports;
 //sequelize = new Sequelize(config.DATABASE_URL);
-sequelize = new Sequelize(config.DATABASE_URL, {logging: false, ssl: true});
+sequelize = new Sequelize(config.DATABASE_URL,
+    {   logging: false,
+        dialect: 'postgres',
+        dialectOptions: {
+          ssl: true
+        }
+    }
+);
 
 var Users = sequelize.define('users', {
   discordID: {
