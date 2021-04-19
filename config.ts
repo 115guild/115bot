@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   PORT:                process.env.PORT || 3000,
   DISCORD_TOKEN:       process.env.DISCORD_TOKEN,
   REGISTER_CHANNEL_ID: process.env.REGISTER_CHANNEL_ID,
@@ -12,6 +12,6 @@ module.exports = {
     ['Master',     process.env.MASTER_ROLE_ID,     process.env.MASTER_HASH_ID],
     ['Legend',     process.env.LEGEND_ROLE_ID,     process.env.LEGEND_HASH_ID]
   ],
-  SQLITE_PATH: process.env.SQLITE_PATH || './db.sqlite'
+  SQLITE_PATH: process.env.SQLITE_PATH || './db.sqlite',
+  DATABASE_URL: process.env.DATABASE_URL || "sqlite:" + module.exports.SQLITE_PATH
 }
-module.exports.DATABASE_URL = process.env.DATABASE_URL || "sqlite:" + module.exports.SQLITE_PATH;

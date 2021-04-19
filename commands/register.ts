@@ -1,10 +1,12 @@
-const db = require("../database");
-const config = require("../config");
+import db from '../database';
+import config from '../config';
+import { Message } from 'discord.js';
+import Command from './Command';
 
-module.exports = {
-	name: '!register',
-	description: 'Register!',
-	execute(msg, args) {
+export default class implements Command {
+	name: '!register';
+	description: 'Register!';
+	execute(msg: Message, args: string[]) {
 		if (msg.channel.id !== config.REGISTER_CHANNEL_ID) {
 			return;
 		}
@@ -21,5 +23,5 @@ module.exports = {
 				db.addUser(msg.author.id, id, msg.author.tag, msg);
 			//}
 		}
-	},
+	};
 };

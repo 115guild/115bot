@@ -1,8 +1,10 @@
-const db = require("../database");
-const axios = require('axios');
-const config = require('../config');
+import db from '../database';
+import axios from 'axios';
+import config from '../config';
+import { Message } from 'discord.js';
+import Command from './Command';
 
-async function setRoles (msg, scoreSaberID) {
+async function setRoles(msg: Message, scoreSaberID: string) {
     if (!scoreSaberID) {
         msg.channel.send(`You have not yet registered, please register with \`!register ScoreSaberID\` at ${msg.guild.channels.get(config.REGISTER_CHANNEL_ID).toString()}`);
         return;
@@ -59,13 +61,13 @@ async function setRoles (msg, scoreSaberID) {
     }
 }
 
-module.exports = {
-    name: '!rankup',
-    description: 'Rankup!',
-    async execute(msg, args) {
+export default class implements Command {
+    name: '!rankup';
+    description: 'Rankup!';
+    async execute(msg: Message) {
         if (msg.channel.id !== config.RANKUP_CHANNEL_ID) {
             return;
         }
         db.getScoreSaberID(msg.member.id, msg, setRoles);
-    },
+    };
 };

@@ -1,10 +1,12 @@
-const db = require("../database");
-const config = require("../config");
+import db from '../database';
+import config from '../config';
+import { Message } from 'discord.js';
+import Command from './Command';
 
-module.exports = {
-	name: '!db',
-	description: 'Database Operation!',
-	execute(msg, args) {
+export default class implements Command {
+	name: '!db';
+	description: 'Database Operation!';
+	execute(msg: Message, args: string[]) {
 		if (msg.channel.id !== config.DB_CHANNEL_ID) {
 			return;
 		}
@@ -74,5 +76,5 @@ module.exports = {
 				msg.channel.send('Usage: \`!db [table] [ADD / REMOVE / UPDATE]\`')
 			}
 		}
-	},
+	};
 };

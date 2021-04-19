@@ -1,8 +1,7 @@
-const Discord = require('discord.js');
-const config = require("./config");
-const bot = new Discord.Client();
-const express = require('express');
-const botCommands = require('./commands');
+import Discord from 'discord.js';
+import config from './config';
+import express from 'express';
+import botCommands from './commands';
 
 const app = express();
 app.get("/", (request, response) => {
@@ -11,12 +10,7 @@ app.get("/", (request, response) => {
 });
 app.listen(config.PORT);
 
-bot.commands = new Discord.Collection();
-
-Object.keys(botCommands).map(key => {
-    bot.commands.set(botCommands[key].name, botCommands[key]);
-});
-
+const bot = new Discord.Client();
 login(0);
 
 bot.on('ready', () => {
@@ -28,20 +22,21 @@ bot.on('message', msg => {
         return;
     }
     const args = msg.content.split(/ +/);
-    const command = args.shift().toLowerCase();
-    console.info(`Called command: ${command} ${args}`);
+    const commandWord = args.shift().toLowerCase();
+    console.info(`Called command: ${commandWord} ${args}`);
+    const command = botCommands.find(c => c.name === commandWord);
 
-    if (!bot.commands.has(command)) return;
+    if (!command) return;
 
     try {
-        bot.commands.get(command).execute(msg, args);
+        command.execute(msg, args);
     } catch (error) {
         console.error(error);
         msg.channel.send('There was an error trying to execute that command!');
     }
 });
 
-function login(n) {
+function login(n: number) {
   if (n > 5) {
     console.error("EXITING DUE TO 5 FAILED LOGINS");
     process.exit(1);

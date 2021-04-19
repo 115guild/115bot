@@ -1,11 +1,12 @@
-const Discord = require('discord.js');
-const db = require("../database");
-const config = require("../config");
+import Discord, { Message } from 'discord.js';
+import db from '../database';
+import config from '../config';
+import Command from './Command';
 
-module.exports = {
-	name: '!unregister',
-	description: 'Unregister!',
-	execute(msg, args) {
+export default class implements Command {
+	name: '!unregister';
+	description: 'Unregister!';
+	execute(msg: Message) {
 		if (msg.channel.id !== config.REGISTER_CHANNEL_ID) {
 			return;
 		}
@@ -20,5 +21,5 @@ module.exports = {
 				return collector.stop();
 			}
 		});
-	},
+	};
 };
