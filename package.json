@@ -3,8 +3,7 @@
   "version": "3.0.1",
   "main": "index.js",
   "scripts": {
-    "postinstall": "tsc",
-    "start": "cd ./build && node index.js"
+    "start": "ts-node index.ts"
   },
   "author": "sfkwww",
   "license": "ISC",
