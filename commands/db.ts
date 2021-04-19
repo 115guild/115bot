@@ -4,8 +4,8 @@ import { Message } from 'discord.js';
 import Command from './Command';
 
 export default class implements Command {
-	name: '!db';
-	description: 'Database Operation!';
+	name = '!db';
+	description = 'Database Operation!';
 	execute(msg: Message, args: string[]) {
 		if (msg.channel.id !== config.DB_CHANNEL_ID) {
 			return;

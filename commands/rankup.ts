@@ -62,8 +62,8 @@ async function setRoles(msg: Message, scoreSaberID: string) {
 }
 
 export default class implements Command {
-    name: '!rankup';
-    description: 'Rankup!';
+    name = '!rankup';
+    description = 'Rankup!';
     async execute(msg: Message) {
         if (msg.channel.id !== config.RANKUP_CHANNEL_ID) {
             return;

@@ -4,8 +4,8 @@ import config from '../config';
 import Command from './Command';
 
 export default class implements Command {
-	name: '!unregister';
-	description: 'Unregister!';
+	name = '!unregister';
+	description = 'Unregister!';
 	execute(msg: Message) {
 		if (msg.channel.id !== config.REGISTER_CHANNEL_ID) {
 			return;

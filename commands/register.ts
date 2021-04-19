@@ -4,8 +4,8 @@ import { Message } from 'discord.js';
 import Command from './Command';
 
 export default class implements Command {
-	name: '!register';
-	description: 'Register!';
+	name = '!register';
+	description = 'Register!';
 	execute(msg: Message, args: string[]) {
 		if (msg.channel.id !== config.REGISTER_CHANNEL_ID) {
 			return;
