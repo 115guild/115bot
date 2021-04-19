@@ -13,19 +13,19 @@ async function setRoles(msg: Message, scoreSaberID: string) {
         msg.channel.send(`You have already obtained the highest rank possible, stop flexing`);
         return;
     }
-    let getNext = false;
     let needsRole = true;
     for (const [role, roleID, hash] of config.ROLES) {
-       if (msg.member.roles.cache.get(roleID)) {
-         needsRole = false;
-         break;
-       }
+        if (msg.member.roles.cache.get(roleID)) {
+            needsRole = false;
+            break;
+        }
     }
-    if(needsRole) {
+    if (needsRole) {
       await msg.member.roles.add(config.ROLES[0][1]).catch(console.error);
     }
     let previousID = null;
     let haveGivenRole = false;
+    let getNext = false;
     for (const [role, roleID, hash] of config.ROLES) {
         if (getNext) {
             console.log(scoreSaberID);
@@ -38,7 +38,7 @@ async function setRoles(msg: Message, scoreSaberID: string) {
             }).catch(console.error);
             console.log(data);
             if (data && data.you && data.you.position) {
-                await msg.member.roles.add(roleID).then((response) => {
+                await msg.member.roles.add(roleID).then(() => {
                     msg.channel.send(`Congratulations on beating the ${role} Milestone, you have earned the <@&${roleID}> role!`);
                     msg.member.roles.remove(previousID).catch(console.error);
                     previousID = roleID;
@@ -50,8 +50,8 @@ async function setRoles(msg: Message, scoreSaberID: string) {
                 }
                 getNext = false;
             } else {
-              msg.channel.send('Connection to campaign api timed out, please try again');
-              getNext = false;
+                msg.channel.send('Connection to campaign api timed out, please try again');
+                getNext = false;
             }
         }
         if (msg.member.roles.cache.get(roleID)) {
