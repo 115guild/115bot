@@ -1,7 +1,7 @@
 import Discord from 'discord.js';
 import config from './config';
 import express from 'express';
-import botCommands from './commands';
+import commands from './commands';
 
 const app = express();
 app.get("/", (request, response) => {
@@ -24,9 +24,12 @@ bot.on('message', msg => {
     const args = msg.content.split(/ +/);
     const commandWord = args.shift().toLowerCase();
     console.info(`Called command: ${commandWord} ${args}`);
-    const command = botCommands.find(c => c.name === commandWord);
+    const command = commands.find(c => c.name == commandWord);
 
-    if (!command) return;
+    if (!command) {
+        console.log('Command not found');
+        return;
+    }
 
     try {
         command.execute(msg, args);
