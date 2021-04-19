@@ -1,6 +1,6 @@
 {
   "name": "115bot",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "main": "index.js",
   "scripts": {
     "postinstall": "tsc",
@@ -8,8 +8,13 @@
   },
   "author": "sfkwww",
   "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/115guild/115bot.git"
+  },
   "dependencies": {
-    "axios": "^0.19.2",
+    "@discordjs/uws": "^10.149.0",
+    "axios": "^0.21.1",
     "discord.js": "^11.6.4",
     "dotenv": "^8.1.0",
     "express": "^4.17.1",
