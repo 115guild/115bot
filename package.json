@@ -13,20 +13,18 @@
   },
   "dependencies": {
     "@discordjs/uws": "^10.149.0",
+    "@types/node": "^14.14.41",
+    "@types/validator": "^13.1.3",
     "axios": "^0.21.1",
     "discord.js": "^11.6.4",
     "dotenv": "^8.1.0",
     "express": "^4.17.1",
     "package": "^1.0.1",
-    "pg": "latest",
-    "pg-hstore": "latest",
+    "pg": "^8.6.0",
+    "pg-hstore": "^2.3.3",
     "sequelize": "^6.6.2",
-    "sqlite3": "latest",
+    "sqlite3": "^5.0.2",
     "ts-node": "^9.1.1",
     "typescript": "^4.2.4"
-  },
-  "devDependencies": {
-    "@types/node": "^14.14.41",
-    "@types/validator": "^13.1.3"
   }
 }
