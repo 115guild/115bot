@@ -54,13 +54,13 @@ export default class Database {
             msg.channel.send(`Successfully registered \`${username}\` with ScoreSaber ID \`${scoreSaberID}\``);
             var needsRole = true;
             for (const [role, roleID, hash] of config.ROLES) {
-                if (msg.member.roles.get(roleID)) {
-                needsRole = false;
-                break;
+                if (msg.member.roles.cache.get(roleID)) {
+                    needsRole = false;
+                    break;
                 }
             }
             if (needsRole) {
-                msg.member.addRole(config.ROLES[0][1]).catch(console.error);
+                msg.member.roles.add(config.ROLES[0][1]).catch(console.error);
             }
             } else {
             msg.channel.send(`\`${username}\` is already registered, use \`!unregister\` to be able to register with a new id`);

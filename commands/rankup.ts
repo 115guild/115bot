@@ -6,23 +6,23 @@ import Command from './Command';
 
 async function setRoles(msg: Message, scoreSaberID: string) {
     if (!scoreSaberID) {
-        msg.channel.send(`You have not yet registered, please register with \`!register ScoreSaberID\` at ${msg.guild.channels.get(config.REGISTER_CHANNEL_ID).toString()}`);
+        msg.channel.send(`You have not yet registered, please register with \`!register ScoreSaberID\` at ${msg.guild.channels.cache.get(config.REGISTER_CHANNEL_ID).toString()}`);
         return;
     }
-    if (msg.member.roles.get(config.ROLES[config.ROLES.length - 1][1])) {
+    if (msg.member.roles.cache.get(config.ROLES[config.ROLES.length - 1][1])) {
         msg.channel.send(`You have already obtained the highest rank possible, stop flexing`);
         return;
     }
     let getNext = false;
     let needsRole = true;
     for (const [role, roleID, hash] of config.ROLES) {
-       if (msg.member.roles.get(roleID)) {
+       if (msg.member.roles.cache.get(roleID)) {
          needsRole = false;
          break;
        }
     }
     if(needsRole) {
-      await msg.member.addRole(config.ROLES[0][1]).catch(console.error);
+      await msg.member.roles.add(config.ROLES[0][1]).catch(console.error);
     }
     let previousID = null;
     let haveGivenRole = false;
@@ -38,9 +38,9 @@ async function setRoles(msg: Message, scoreSaberID: string) {
             }).catch(console.error);
             console.log(data);
             if (data && data.you && data.you.position) {
-                await msg.member.addRole(roleID).then((response) => {
+                await msg.member.roles.add(roleID).then((response) => {
                     msg.channel.send(`Congratulations on beating the ${role} Milestone, you have earned the <@&${roleID}> role!`);
-                    msg.member.removeRole(previousID).catch(console.error);
+                    msg.member.roles.remove(previousID).catch(console.error);
                     previousID = roleID;
                     haveGivenRole = true;
                 }).catch(console.error);
@@ -54,7 +54,7 @@ async function setRoles(msg: Message, scoreSaberID: string) {
               getNext = false;
             }
         }
-        if (msg.member.roles.get(roleID)) {
+        if (msg.member.roles.cache.get(roleID)) {
             getNext = true;
             previousID = roleID;
         }

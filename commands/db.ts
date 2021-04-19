@@ -10,7 +10,7 @@ export default class implements Command {
 		if (msg.channel.id !== config.DB_CHANNEL_ID) {
 			return;
 		}
-		if (!msg.member.roles.find(r => r.name === "Admin")) {
+		if (!msg.member.roles.cache.find(r => r.name === "Admin")) {
 			msg.channel.send('The role \`Admin\` is required to run this command.');
 			return;
 		}
