@@ -23,7 +23,7 @@ bot.on('message', msg => {
     }
     const args = msg.content.split(/ +/);
     const commandWord = args.shift().toLowerCase();
-    console.info(`Called command: ${commandWord} ${args}`);
+    console.info(`${msg.author.tag} called command: ${commandWord} ${args}`);
     const command = commands.find(c => c.name == commandWord);
 
     if (!command) {
