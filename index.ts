@@ -5,8 +5,8 @@ import commands from './commands';
 
 const app = express();
 app.get("/", (request, response) => {
-  console.log(Date.now() + " Ping Received");
-  response.sendStatus(200);
+    console.log(Date.now() + " Ping Received");
+    response.sendStatus(200);
 });
 app.listen(config.PORT);
 
@@ -41,8 +41,8 @@ bot.on('message', msg => {
 
 function login(n: number) {
     if (n > 5) {
-    console.error("EXITING DUE TO 5 FAILED LOGINS");
-    process.exit(1);
+        console.error("EXITING DUE TO 5 FAILED LOGINS");
+        process.exit(1);
     }
     bot.login(config.DISCORD_TOKEN).catch(function(err) {
     console.error(err);
