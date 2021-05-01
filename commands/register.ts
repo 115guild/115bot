@@ -15,6 +15,13 @@ export default class implements Command {
 		} else {
 			let id = args[0];
 
+            // Test if argument is an ID
+            if (db.isValidSSID(id)) {
+                db.addUser(msg.author.id, id, msg.author.tag, msg);
+                return;
+            }
+            // If not, see if argument is of form */u/ID*
+
             const startOfId = id.indexOf('/u/');
             if (startOfId !== -1)
                 id = id.slice(startOfId + 3);
@@ -27,9 +34,6 @@ export default class implements Command {
             endOfId = endOfId < 0 ? id.indexOf('&') : endOfId;
             if (endOfId !== -1)
                 id = id.slice(0, endOfId);
-
-            // Idiot filter, removes all invalid characters from id
-            id = id.replace(/[^a-z0-9/:.]/gi, '');
 
 			if (!db.isValidSSID(id)) {
                 msg.reply('Please use a valid scoresaber profile.');
