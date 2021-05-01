@@ -29,10 +29,10 @@ export default class implements Command {
 						const username = msg.mentions.users.first().tag;
 						const discordID = msg.mentions.users.first().id;
 						const scoreSaberID = args[3];
-						if (!db.isValidSSID(scoreSaberID)) {
-							msg.channel.send(db.invalidSSIDMessage);
-							return;
-						}
+						// if (!db.isValidSSID(scoreSaberID)) {
+						// 	msg.channel.send(db.invalidSSIDMessage);
+						// 	return;
+						// }
 						db.addUser(discordID, scoreSaberID, username, msg);
 						break;
 					}
