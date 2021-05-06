@@ -51,25 +51,25 @@ export default class Database {
             defaults: {scoreSaberID: scoreSaberID, username: username}
         }).then(function([user,created]) {
             if (created) {
-            msg.channel.send(`Successfully registered \`${username}\` with ScoreSaber ID \`${scoreSaberID}\``);
-            var needsRole = true;
-            for (const [role, roleID, hash] of config.ROLES) {
-                if (msg.member.roles.cache.get(roleID)) {
-                    needsRole = false;
-                    break;
+                msg.channel.send(`Successfully registered \`${username}\` with ScoreSaber ID \`${scoreSaberID}\``);
+                var needsRole = true;
+                for (const [role, roleID, hash] of config.ROLES) {
+                    if (msg.member.roles.cache.get(roleID)) {
+                        needsRole = false;
+                        break;
+                    }
                 }
-            }
-            if (needsRole) {
-                msg.member.roles.add(config.ROLES[0][1]).catch(console.error);
-            }
+                if (needsRole) {
+                    msg.member.roles.add(config.ROLES[0][1]).catch(console.error);
+                }
             } else {
-            msg.channel.send(`\`${username}\` is already registered, use \`!unregister\` to be able to register with a new id`);
+                msg.channel.send(`\`${username}\` is already registered, use \`!unregister\` to be able to register with a new id`);
             }
         }).catch(error => {
-            if(Array.isArray(error.fields) && error.fields[0] === 'scoreSaberID') {
-            Users.findOne({where: {scoreSaberID: scoreSaberID}}).then(function (user) {
-                msg.channel.send(`The ScoreSaber ID \`${scoreSaberID}\` is already used by \`${user.username}\` \`[${user.discordID}]\``);
-            }).catch(console.error);
+            if (error.fields && error.fields.scoreSaberID) {
+                Users.findOne({where: {scoreSaberID: scoreSaberID}}).then(function (user) {
+                    msg.channel.send(`The ScoreSaber ID \`${scoreSaberID}\` is already used by \`${user.username}\` \`[${user.discordID}]\``);
+                }).catch(console.error);
             }
             console.error(error);
         });
@@ -78,11 +78,11 @@ export default class Database {
     static removeUser(discordID: string, msg: Message) {
         Users.findOne({where: {discordID: discordID}}).then(user => {
             if (user) {
-            user.destroy().then(() => {
-                msg.channel.send(`Successfully unregistered \`${user.username}\` \`[${discordID}]\``);
-            }).catch(console.error); 
+                user.destroy().then(() => {
+                    msg.channel.send(`Successfully unregistered \`${user.username}\` \`[${discordID}]\``);
+                }).catch(console.error); 
             } else {
-            msg.channel.send('That user is not registered in the database');
+                msg.channel.send('That user is not registered in the database');
             }
         }).catch(console.error);
     }
@@ -90,9 +90,9 @@ export default class Database {
     static getScoreSaberID(discordID: string, msg: Message, callback: CallableFunction) {
         Users.findOne({where: {discordID: discordID}}).then(user => {
             if (user) {
-            callback(msg, user.scoreSaberID)
+                callback(msg, user.scoreSaberID)
             } else {
-            callback(msg, null)
+                callback(msg, null)
             }
         }).catch(console.error);
     }
@@ -100,11 +100,11 @@ export default class Database {
     static updateUser(discordID: string, scoreSaberID: string, username: string, msg: Message) {
         Users.findOne({where: {discordID: discordID}}).then(user => {
             if (user) {
-            user.scoreSaberID = scoreSaberID;
-            user.username = username; 
-            msg.channel.send(`Successfully updated record for \`${user}\` \`[${discordID}]\``);
+                user.scoreSaberID = scoreSaberID;
+                user.username = username; 
+                msg.channel.send(`Successfully updated record for \`${user}\` \`[${discordID}]\``);
             } else {
-            msg.channel.send('That user is not registered in the database');
+                msg.channel.send('That user is not registered in the database');
             }
         }).catch(console.error);
     }
