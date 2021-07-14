@@ -44,9 +44,9 @@ function login(n: number) {
         console.error("EXITING DUE TO 5 FAILED LOGINS");
         process.exit(1);
     }
-    bot.login(config.DISCORD_TOKEN).catch(function(err) {
-    console.error(err);
-    console.error("TRYING LOGIN AGAIN");
-    login(n+1);
+    bot.login(config.DISCORD_TOKEN).catch(err => {
+        console.error(err);
+        console.error("TRYING LOGIN AGAIN");
+        login(n++);
     });
 }
