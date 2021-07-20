@@ -50,7 +50,7 @@ async function setRoles(msg: Message, scoreSaberID: string) {
                 }
                 getNext = false;
             } else {
-                msg.channel.send('Connection to campaign api timed out, please try again');
+                msg.channel.send('Connection to the campaign API timed out, please try again. If it still doesn\'t work, please post a screenshot of the completed milestone showing your score on the leaderboard and tag the moderators');
                 getNext = false;
             }
         }
